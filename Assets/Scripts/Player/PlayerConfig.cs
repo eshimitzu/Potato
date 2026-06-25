@@ -9,5 +9,6 @@ namespace Potato.Player
         public float rotationSpeed = 720f;
         public float interactionRadius = 1.5f;
         public LayerMask interactableLayer;
+        public float attackCooldown = 0.8f;
     }
 }

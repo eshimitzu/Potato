@@ -5,13 +5,15 @@ namespace Potato.Player
     [RequireComponent(typeof(CharacterController))]
     public class PlayerMovement : MonoBehaviour
     {
-        [SerializeField] private PlayerConfig _config;
+        private PlayerConfig _config;
 
         private CharacterController _cc;
         private Vector3 _velocity;
 
         public bool IsMoving { get; private set; }
         public float CurrentSpeed { get; private set; }
+
+        public void Initialize(PlayerConfig config) => _config = config;
 
         private void Awake() => _cc = GetComponent<CharacterController>();
 
