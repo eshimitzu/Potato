@@ -5,7 +5,7 @@ using Potato.Entities.Potato;
 
 namespace Potato.Entities.Crate
 {
-    public class CrateController : MonoBehaviour, IInteractable
+    public class CrateController : MonoBehaviour, IInteractable, ICountSource
     {
         public enum State { Empty, Half, Full }
 
@@ -23,6 +23,7 @@ namespace Potato.Entities.Crate
 
         public event Action<State> OnStateChanged;
         public event Action<int> OnCollected;
+        public event Action OnCountChanged;
 
         public void Initialize(PotatoUpgrader upgrader)
         {
@@ -34,15 +35,24 @@ namespace Potato.Entities.Crate
         {
             if (IsFull) return;
             Count++;
+            OnCountChanged?.Invoke();
             UpdateState();
         }
 
         public void Interact()
         {
             if (Count == 0) return;
-            OnCollected?.Invoke(Count);
+            TakeAll();
+        }
+
+        public int TakeAll()
+        {
+            int taken = Count;
             Count = 0;
+            OnCountChanged?.Invoke();
+            OnCollected?.Invoke(taken);
             UpdateState();
+            return taken;
         }
 
         private void UpdateState()
