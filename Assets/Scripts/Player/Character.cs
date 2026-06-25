@@ -10,6 +10,7 @@ namespace Potato.Player
         private static readonly int AttackHash = Animator.StringToHash("Attack");
 
         [SerializeField] private Animator _animator;
+        [SerializeField] private PlayerInteractor _interactor;
         [SerializeField] private float _animDampTime = 0.1f;
 
         private PlayerMovement _movement;
@@ -30,6 +31,7 @@ namespace Potato.Player
         public void Attack()
         {
             _animator.SetTrigger(AttackHash);
+            _interactor.Nearest?.Interact();
         }
     }
 }
