@@ -59,6 +59,11 @@ namespace Potato.Player
             _attackTimer = _config.attackCooldown;
             _animator.ResetTrigger(AttackHash);
             _animator.SetTrigger(AttackHash);
+        }
+
+        // Called via Animation Event at the hit frame
+        public void OnAttackHit()
+        {
             _interactor.Nearest?.Interact();
         }
     }

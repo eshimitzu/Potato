@@ -8,23 +8,45 @@ namespace Potato.Entities.Worm
 {
     public class WormController : MonoBehaviour, IInteractable
     {
-        public enum State { Calm, Riled }
-
         [SerializeField] private GameObject _calmView;
         [SerializeField] private GameObject _riledView;
+        [SerializeField] private Transform _leftEye;
+        [SerializeField] private Transform _rightEye;
 
         private WormConfig _config;
-
-        public State CurrentState { get; private set; }
+        private int _hp;
 
         public event Action<WormController> OnDied;
-        public event Action<State> OnStateChanged;
 
         public void Initialize(WormConfig config)
         {
             _config = config;
-            SetState(State.Calm);
+            _hp = config.hp;
+            _calmView.SetActive(true);
+            _riledView.SetActive(false);
             Appear();
+        }
+
+        public void Interact()
+        {
+            if (_hp <= 0) return;
+            _hp--;
+            BulgeEyes();
+            if (_hp <= 0) Die();
+        }
+
+        private void BulgeEyes()
+        {
+            BulgeEye(_leftEye);
+            BulgeEye(_rightEye);
+        }
+
+        private void BulgeEye(Transform eye)
+        {
+            if (eye == null) return;
+            eye.DOKill();
+            eye.localScale = Vector3.one;
+            eye.DOPunchScale(Vector3.one * 5f, 0.5f, 1, 0.1f);
         }
 
         private void Appear()
@@ -35,24 +57,11 @@ namespace Potato.Entities.Worm
             transform.DOMoveY(targetY, _config.appearDuration).SetEase(Ease.OutBounce);
         }
 
-        public void Interact()
-        {
-            if (CurrentState == State.Calm)
-                SetState(State.Riled);
-            else
-                Die();
-        }
-
-        private void SetState(State state)
-        {
-            CurrentState = state;
-            _calmView.SetActive(state == State.Calm);
-            _riledView.SetActive(state == State.Riled);
-            OnStateChanged?.Invoke(CurrentState);
-        }
-
         private void Die()
         {
+            _hp = 0;
+            _calmView.SetActive(false);
+            _riledView.SetActive(true);
             CurrencySystem.Instance.Add(_config.meatCurrency, _config.meatDropAmount, transform.position);
             OnDied?.Invoke(this);
             transform.DOScale(Vector3.zero, _config.deathDuration)
