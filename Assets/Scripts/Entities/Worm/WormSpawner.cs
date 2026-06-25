@@ -20,21 +20,19 @@ namespace Potato.Entities.Worm
             while (true)
             {
                 yield return new WaitForSeconds(_config.spawnInterval);
-                SpawnWave();
+                if (_activeWorms.Count < _config.maxWorms)
+                    SpawnOne();
             }
         }
 
-        private void SpawnWave()
+        private void SpawnOne()
         {
-            for (int i = 0; i < _config.spawnCount; i++)
-            {
-                Transform spawnPoint = _spawnPoints[i % _spawnPoints.Length];
-                GameObject go = Instantiate(_wormPrefab, spawnPoint.position, Quaternion.identity);
-                WormController worm = go.GetComponent<WormController>();
-                worm.Initialize(_config, _potatoTarget);
-                worm.OnDied += OnWormDied;
-                _activeWorms.Add(worm);
-            }
+            Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
+            GameObject go = Instantiate(_wormPrefab, spawnPoint.position, Quaternion.identity);
+            WormController worm = go.GetComponent<WormController>();
+            worm.Initialize(_config, _potatoTarget);
+            worm.OnDied += OnWormDied;
+            _activeWorms.Add(worm);
         }
 
         private void OnWormDied(WormController worm) => _activeWorms.Remove(worm);

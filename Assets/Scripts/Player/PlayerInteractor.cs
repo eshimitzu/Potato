@@ -6,7 +6,9 @@ namespace Potato.Player
 {
     public class PlayerInteractor : MonoBehaviour
     {
-        [SerializeField] private PlayerConfig _config;
+        private PlayerConfig _config;
+
+        public void Initialize(PlayerConfig config) => _config = config;
 
         public IInteractable Nearest { get; private set; }
 

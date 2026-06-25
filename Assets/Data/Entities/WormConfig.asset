@@ -9,13 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 31e30bd25b26b4568a6108f9d698d5f8, type: 3}
-  m_Name: PlayerConfig
+  m_Script: {fileID: 11500000, guid: 25b155fc3f92544969b42c97e81e5888, type: 3}
+  m_Name: WormConfig
   m_EditorClassIdentifier: 
-  moveSpeed: 4
-  rotationSpeed: 720
-  interactionRadius: 1.5
-  interactableLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  attackCooldown: 0.8
+  hp: 3
+  moveSpeed: 1
+  meatCurrency: {fileID: 11400000, guid: 393fccc4b38654151b77cd77290e2612, type: 2}
+  meatDropAmount: 1
+  spawnInterval: 5
+  maxWorms: 3
