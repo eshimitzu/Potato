@@ -1,4 +1,5 @@
 using System;
+using DG.Tweening;
 using UnityEngine;
 using Potato.Currencies;
 using Potato.Interactions;
@@ -7,46 +8,56 @@ namespace Potato.Entities.Worm
 {
     public class WormController : MonoBehaviour, IInteractable
     {
+        public enum State { Calm, Riled }
+
+        [SerializeField] private GameObject _calmView;
+        [SerializeField] private GameObject _riledView;
+
         private WormConfig _config;
-        private Transform _potatoTarget;
-        private int _hp;
-        private bool _dead;
+
+        public State CurrentState { get; private set; }
 
         public event Action<WormController> OnDied;
+        public event Action<State> OnStateChanged;
 
-        public void Initialize(WormConfig config, Transform potatoTarget)
+        public void Initialize(WormConfig config)
         {
             _config = config;
-            _potatoTarget = potatoTarget;
-            _hp = config.hp;
-            _dead = false;
+            SetState(State.Calm);
+            Appear();
         }
 
-        private void Update()
+        private void Appear()
         {
-            if (_dead || _potatoTarget == null) return;
-            transform.position = Vector3.MoveTowards(
-                transform.position,
-                _potatoTarget.position,
-                _config.moveSpeed * Time.deltaTime);
+            transform.localScale = Vector3.one;
+            float targetY = transform.position.y;
+            transform.position -= Vector3.up * _config.burrowDepth;
+            transform.DOMoveY(targetY, _config.appearDuration).SetEase(Ease.OutBounce);
         }
 
-        public void TakeDamage(int amount)
+        public void Interact()
         {
-            if (_dead) return;
-            _hp -= amount;
-            if (_hp <= 0) Die();
+            if (CurrentState == State.Calm)
+                SetState(State.Riled);
+            else
+                Die();
         }
 
-        // IInteractable: tap worm to deal 1 damage
-        public void Interact() => TakeDamage(1);
+        private void SetState(State state)
+        {
+            CurrentState = state;
+            _calmView.SetActive(state == State.Calm);
+            _riledView.SetActive(state == State.Riled);
+            OnStateChanged?.Invoke(CurrentState);
+        }
 
         private void Die()
         {
-            _dead = true;
             CurrencySystem.Instance.Add(_config.meatCurrency, _config.meatDropAmount);
             OnDied?.Invoke(this);
-            Destroy(gameObject);
+            transform.DOScale(Vector3.zero, _config.deathDuration)
+                .SetEase(Ease.InBack)
+                .OnComplete(() => Destroy(gameObject));
         }
     }
 }
