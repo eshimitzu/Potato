@@ -164,6 +164,7 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
     Standalone: com.Belaroots.Potato
+    iPhone: com.Belaroots.Potato
   buildNumber:
     Standalone: 0
     VisionOS: 0

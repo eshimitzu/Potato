@@ -17,6 +17,13 @@
       },
       "hash": "85c101f5329ec1b0c6f70cba44614166dd78f53c"
     },
+    "com.dbrizov.naughtyattributes": {
+      "version": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "eb33d661d7abee22807fdd6d15b90732932a0491"
+    },
     "com.unity.collab-proxy": {
       "version": "2.12.4",
       "depth": 0,
