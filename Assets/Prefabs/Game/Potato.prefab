@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 7d08910b2d0eb4bbd9c27b7ece201625, type: 2}
+  _scaleRoot: {fileID: 6464790497014663617}
 --- !u!114 &3340839745190559738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -76,7 +77,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0e3b358744224ed5b8586f52384c664, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 337565dcf43344932a2da5f65a2d3bc8, type: 2}
   _upgrader: {fileID: 120213579850756500}
   _crate: {fileID: 0}
   _spawnPoint: {fileID: 546521849809196812}

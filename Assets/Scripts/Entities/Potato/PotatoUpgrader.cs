@@ -10,6 +10,7 @@ namespace Potato.Entities.Potato
     public class PotatoUpgrader : MonoBehaviour, IInteractable
     {
         [SerializeField] private PotatoLevelConfig _config;
+        [SerializeField] private Transform _scaleRoot;
 
         public PotatoLevelConfig Config => _config;
 
@@ -38,9 +39,9 @@ namespace Potato.Entities.Potato
         {
             float scale = CurrentData.scale;
             if (animate)
-                transform.DOScale(Vector3.one * scale, 0.4f).SetEase(Ease.OutBack);
+                _scaleRoot.DOScale(Vector3.one * scale, 0.4f).SetEase(Ease.OutBack);
             else
-                transform.localScale = Vector3.one * scale;
+                _scaleRoot.localScale = Vector3.one * scale;
         }
 
         [Button("Upgrade (cheat)")]

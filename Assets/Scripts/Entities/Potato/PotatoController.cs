@@ -50,15 +50,6 @@ namespace Potato.Entities.Potato
             }
         }
 
-        public bool TryHarvest(CurrencySystem currencies)
-        {
-            if (CurrentState != State.Ready) return false;
-            currencies.Add(_config.softCurrency, _config.sellPrice);
-            Stage = 0;
-            WaterTicks = 0;
-            SetState(State.Idle);
-            return true;
-        }
 
         public void RestoreState(int stage, int waterTicks)
         {
@@ -89,14 +80,14 @@ namespace Potato.Entities.Potato
             OnStateChanged?.Invoke(CurrentState);
         }
 
-        private void PlayIdleSquash()
-        {
-            _idleTween?.Kill(true);
-            _idleTween = transform
-                .DOScale(new Vector3(1.05f, 0.92f, 1.05f), 0.9f)
-                .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
-        }
+        private void PlayIdleSquash()                                                                     
+        {                                                                                                 
+            _idleTween?.Kill(true);                                                                       
+            _idleTween = transform                                                                        
+                .DOScale(new Vector3(1.05f, 0.92f, 1.05f), 0.9f)                                          
+                .SetEase(Ease.InOutSine)                                                                  
+                .SetLoops(-1, LoopType.Yoyo);                                                             
+        }                                  
 
         private void StopIdleSquash()
         {
