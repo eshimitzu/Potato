@@ -53,7 +53,7 @@ namespace Potato.Entities.Worm
 
         private void Die()
         {
-            CurrencySystem.Instance.Add(_config.meatCurrency, _config.meatDropAmount);
+            CurrencySystem.Instance.Add(_config.meatCurrency, _config.meatDropAmount, transform.position);
             OnDied?.Invoke(this);
             transform.DOScale(Vector3.zero, _config.deathDuration)
                 .SetEase(Ease.InBack)

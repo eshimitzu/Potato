@@ -11,6 +11,7 @@ namespace Potato.Currencies
         private readonly Dictionary<string, long> _balances = new();
 
         public event Action<string, long> OnChanged;
+        public event Action<string, long, Vector3> OnAddedFromSource;
 
         private void Awake()
         {
@@ -21,12 +22,14 @@ namespace Potato.Currencies
 
         public long Get(CurrencyConfig cfg) => _balances.GetValueOrDefault(cfg.id, 0);
 
-        public void Add(CurrencyConfig cfg, long amount)
+        public void Add(CurrencyConfig cfg, long amount, Vector3 sourceWorldPos = default)
         {
             if (amount <= 0) return;
             _balances.TryGetValue(cfg.id, out long current);
             _balances[cfg.id] = current + amount;
             OnChanged?.Invoke(cfg.id, _balances[cfg.id]);
+            if (sourceWorldPos != default)
+                OnAddedFromSource?.Invoke(cfg.id, amount, sourceWorldPos);
         }
 
         public bool TrySpend(CurrencyConfig cfg, long amount)
