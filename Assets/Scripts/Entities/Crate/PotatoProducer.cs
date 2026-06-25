@@ -10,6 +10,7 @@ namespace Potato.Entities.Crate
     {
         [SerializeField] private PotatoUpgrader _upgrader;
         [SerializeField] private CrateController _crate;
+        [SerializeField] private PotatoController _potato;
         [SerializeField] private Transform _spawnPoint;
 
         private float ProduceInterval => 60f / _upgrader.CurrentData.potatoesPerMinute;
@@ -27,7 +28,7 @@ namespace Potato.Entities.Crate
             while (true)
             {
                 yield return new WaitForSeconds(ProduceInterval);
-                if (!_crate.IsFull)
+                if (!_crate.IsFull && _potato.CurrentState != PotatoController.State.Sad)
                     SpawnPotato();
             }
         }

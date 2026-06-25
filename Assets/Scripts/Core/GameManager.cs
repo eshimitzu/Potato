@@ -44,8 +44,8 @@ namespace Potato.Core
             var data = new SaveData
             {
                 // wellBuilt = _well.IsBuilt,
-                potatoStage = _potato.Stage,
-                waterTicksAccumulated = _potato.WaterTicks,
+                // potatoStage = _potato.Stage,
+                // waterTicksAccumulated = _potato.WaterTicks,
             };
             foreach (var kvp in _currencies.GetAllBalances())
                 data.currencies.Add(new SaveData.CurrencyEntry { id = kvp.Key, amount = kvp.Value });
@@ -65,7 +65,7 @@ namespace Potato.Core
                 if (!savedIds.Contains(cfg.id) && cfg.initialAmount > 0)
                     _currencies.Set(cfg.id, cfg.initialAmount);
 
-            _potato.RestoreState(data.potatoStage, data.waterTicksAccumulated);
+            // _potato.RestoreState(data.potatoStage, data.waterTicksAccumulated);
 
             // if (data.wellBuilt) _well.Build();
         }

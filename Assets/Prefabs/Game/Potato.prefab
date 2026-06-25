@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8c2083e44b9a44d2977750571c85e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _config: {fileID: 11400000, guid: 682cc5dc065984717a22ff914ee3d3e6, type: 2}
+  _wormSpawner: {fileID: 0}
   _need: {fileID: 7473372494337310155}
   _faceRenderer: {fileID: 5331312428208534190}
   _smileMaterial: {fileID: 2100000, guid: 686e9516fa78a7142a0eab72bfe4c128, type: 2}
@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _upgrader: {fileID: 120213579850756500}
   _crate: {fileID: 0}
+  _potato: {fileID: 2639850754835549976}
   _spawnPoint: {fileID: 546521849809196812}
 --- !u!114 &7473372494337310155
 MonoBehaviour:

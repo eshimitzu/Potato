@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Potato.Entities.Worm
 {
@@ -11,6 +13,11 @@ namespace Potato.Entities.Worm
         [SerializeField] private Transform[] _spawnPoints;
 
         private readonly List<WormController> _activeWorms = new();
+
+        public IReadOnlyList<WormController> ActiveWorms => _activeWorms;
+        public bool AnyAlive => _activeWorms.Count > 0;
+
+        public event Action<bool> OnAnyAliveChanged;
 
         private void Start() => StartCoroutine(SpawnLoop());
 
@@ -32,10 +39,15 @@ namespace Potato.Entities.Worm
             worm.Initialize(_config);
             worm.OnDied += OnWormDied;
             _activeWorms.Add(worm);
+            if (_activeWorms.Count == 1)
+                OnAnyAliveChanged?.Invoke(true);
         }
 
-        private void OnWormDied(WormController worm) => _activeWorms.Remove(worm);
-
-        public IReadOnlyList<WormController> ActiveWorms => _activeWorms;
+        private void OnWormDied(WormController worm)
+        {
+            _activeWorms.Remove(worm);
+            if (_activeWorms.Count == 0)
+                OnAnyAliveChanged?.Invoke(false);
+        }
     }
 }
