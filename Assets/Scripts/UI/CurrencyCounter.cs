@@ -13,12 +13,14 @@ namespace Potato.UI
         [SerializeField] private Image _icon;
 
         private Canvas _canvas;
+        private long _displayedAmount;
 
         private void Start()
         {
             _canvas = GetComponentInParent<Canvas>();
             if (_icon != null) _icon.sprite = _config.icon;
-            Refresh(CurrencySystem.Instance.Get(_config));
+            _displayedAmount = CurrencySystem.Instance.Get(_config);
+            Refresh(_displayedAmount);
             CurrencySystem.Instance.OnChanged += OnCurrencyChanged;
             CurrencySystem.Instance.OnAddedFromSource += OnAddedFromSource;
         }
@@ -30,17 +32,33 @@ namespace Potato.UI
             CurrencySystem.Instance.OnAddedFromSource -= OnAddedFromSource;
         }
 
-        private void OnCurrencyChanged(string id, long amount)
+        private void OnCurrencyChanged(string id, long amount)  
         {
-            if (id == _config.id) Refresh(amount);
+            if (id != _config.id) return;
+            if (amount > _displayedAmount) return;
+            _displayedAmount = amount;
+            Refresh(amount);
         }
 
-        private void OnAddedFromSource(string id, long amount, Vector3 worldPos)
+        private void OnAddedFromSource(string id, long amount, Vector3 worldPos, bool animated)
         {
-            if (id != _config.id || _config.prefab == null || _canvas == null) return;
+            if (id != _config.id) return;
+            if (!animated || _config.prefab == null || _canvas == null)
+            {
+                OnFlyComplete();
+                return;
+            }
             Vector3 screenStart = Camera.main.WorldToScreenPoint(worldPos);
             var go = Instantiate(_config.prefab, _canvas.transform);
-            go.GetComponent<CurrencyFly>()?.Play(screenStart, transform.position);
+            var fly = go.GetComponent<CurrencyFly>();
+            fly.SetIcon(_config.icon);
+            fly.Play(screenStart, transform.position, OnFlyComplete);
+        }
+
+        private void OnFlyComplete()
+        {
+            _displayedAmount = CurrencySystem.Instance.Get(_config);
+            Refresh(_displayedAmount);
         }
 
         private void Refresh(long amount) => _label.text = amount.ToString();

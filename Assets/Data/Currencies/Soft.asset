@@ -15,5 +15,5 @@ MonoBehaviour:
   id: Soft
   displayName: Soft
   icon: {fileID: 21300000, guid: d3563b1cafde744ec8ac6dcf33dee54f, type: 3}
-  prefab: {fileID: 0}
+  prefab: {fileID: 5574497699645801493, guid: adb401dd58eb34c97a271e7079139caa, type: 3}
   initialAmount: 100

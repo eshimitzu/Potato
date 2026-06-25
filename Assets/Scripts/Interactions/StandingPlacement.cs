@@ -39,6 +39,15 @@ namespace Potato.Interactions
             if (Counter != null) Counter.text = text;
         }
 
+        protected void SetVisible(bool visible)
+        {
+            GetComponent<Collider>().enabled = visible;
+            if (_visual == null) return;
+            _visual.DOKill();
+            _visual.DOScale(visible ? _baseScale : Vector3.zero, 0.2f)
+                .SetEase(visible ? Ease.OutBack : Ease.InBack);
+        }
+
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(_playerTag)) return;

@@ -1,47 +1,76 @@
 using System;
 using DG.Tweening;
 using UnityEngine;
-using Potato.Currencies;
 
 namespace Potato.Entities.Potato
 {
     public class PotatoController : MonoBehaviour
     {
-        public enum State { Idle, Sad, Growing, Ready }
+        public enum State { Idle, Growing, Ready }
 
         [SerializeField] private PotatoConfig _config;
+        [SerializeField] private PotatoNeed _need;
         [SerializeField] private Renderer _faceRenderer;
         [SerializeField] private Material _smileMaterial;
         [SerializeField] private Material _sadMaterial;
+        [SerializeField] private Transform _squashRoot;
 
         public State CurrentState { get; private set; } = State.Idle;
         public int Stage { get; private set; }
         public int WaterTicks { get; private set; }
 
         private int _wormsNearby;
+        private bool _needActive;
         private Tween _idleTween;
+
+        private bool IsSad => _wormsNearby > 0 || _needActive;
 
         public event Action<State> OnStateChanged;
         public event Action<int> OnStageChanged;
 
-        private void Awake() => PlayIdleSquash();
+        private void Awake() => RefreshFace();
+
+        private void Start()
+        {
+            if (_need == null) return;
+            _need.OnNeedAppeared += OnNeedAppeared;
+            _need.OnNeedSatisfied += OnNeedSatisfied;
+        }
+
+        private void OnDestroy()
+        {
+            if (_need == null) return;
+            _need.OnNeedAppeared -= OnNeedAppeared;
+            _need.OnNeedSatisfied -= OnNeedSatisfied;
+        }
 
         public void OnWormEnter()
         {
             _wormsNearby++;
-            SetState(State.Sad);
+            RefreshFace();
         }
 
         public void OnWormExit()
         {
             _wormsNearby = Mathf.Max(0, _wormsNearby - 1);
-            if (_wormsNearby == 0 && CurrentState == State.Sad)
-                SetState(State.Idle);
+            RefreshFace();
+        }
+
+        private void OnNeedAppeared(PotatoNeed.Need _)
+        {
+            _needActive = true;
+            RefreshFace();
+        }
+
+        private void OnNeedSatisfied()
+        {
+            _needActive = false;
+            RefreshFace();
         }
 
         public void ReceiveWaterTick()
         {
-            if (CurrentState == State.Ready || CurrentState == State.Sad) return;
+            if (CurrentState == State.Ready || IsSad) return;
             WaterTicks++;
             if (WaterTicks >= _config.waterTicksToGrow)
             {
@@ -49,7 +78,6 @@ namespace Potato.Entities.Potato
                 GrowOneStage();
             }
         }
-
 
         public void RestoreState(int stage, int waterTicks)
         {
@@ -70,29 +98,31 @@ namespace Potato.Entities.Potato
         {
             if (CurrentState == next) return;
             CurrentState = next;
-            _faceRenderer.material = next == State.Sad ? _sadMaterial : _smileMaterial;
-
-            if (next == State.Idle)
-                PlayIdleSquash();
-            else
-                StopIdleSquash();
-
             OnStateChanged?.Invoke(CurrentState);
         }
 
-        private void PlayIdleSquash()                                                                     
-        {                                                                                                 
-            _idleTween?.Kill(true);                                                                       
-            _idleTween = transform                                                                        
-                .DOScale(new Vector3(1.05f, 0.92f, 1.05f), 0.9f)                                          
-                .SetEase(Ease.InOutSine)                                                                  
-                .SetLoops(-1, LoopType.Yoyo);                                                             
-        }                                  
+        private void RefreshFace()
+        {
+            var materials = _faceRenderer.sharedMaterials;
+            materials[1] = IsSad ? _sadMaterial : _smileMaterial;
+            _faceRenderer.sharedMaterials = materials;
+            if (IsSad) StopIdleSquash();
+            else PlayIdleSquash();
+        }
+
+        private void PlayIdleSquash()
+        {
+            _idleTween?.Kill(true);
+            _idleTween = _squashRoot
+                .DOScale(new Vector3(1.05f, 0.92f, 1.05f), 0.9f)
+                .SetEase(Ease.InOutSine)
+                .SetLoops(-1, LoopType.Yoyo);
+        }
 
         private void StopIdleSquash()
         {
             _idleTween?.Kill(true);
-            transform.localScale = Vector3.one;
+            _squashRoot.localScale = Vector3.one;
         }
     }
 }

@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2645055192606036259}
-  - component: {fileID: 7761371995005597225}
   - component: {fileID: 7837250259543770506}
+  - component: {fileID: 4985734717359096910}
+  - component: {fileID: 3182150825276637518}
   m_Layer: 0
   m_Name: PotatoPlacement
   m_TagString: Untagged
@@ -34,26 +35,6 @@ Transform:
   - {fileID: 8256360808927116972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7761371995005597225
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5592322765412552948}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72cc7f2ded3bf4178a0fb4e7135b3790, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _visual: {fileID: 8268762224795716193}
-  _icon: {fileID: 6383548194612489393}
-  Counter: {fileID: 4521316675363721745}
-  _interval: 0.5
-  _playerTag: Player
-  _source: {fileID: 0}
-  _rewardCurrency: {fileID: 11400000, guid: d3da4945877cb4d08b2504ffd7923ee7, type: 2}
-  _rewardPerUnit: 1
 --- !u!65 &7837250259543770506
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -75,6 +56,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4985734717359096910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592322765412552948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd99ef5b41632447cb1fbbed38d835cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _visual: {fileID: 8268762224795716193}
+  _icon: {fileID: 6383548194612489393}
+  Counter: {fileID: 4521316675363721745}
+  _interval: 0.5
+  _playerTag: Player
+  _sourceObject: {fileID: 0}
+  _targetObject: {fileID: 5592322765412552948}
+  _amountPerTick: 1
+--- !u!114 &3182150825276637518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5592322765412552948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3caf01ccf39284b5eafb05ff5732e7d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currency: {fileID: 11400000, guid: d3da4945877cb4d08b2504ffd7923ee7, type: 2}
 --- !u!1001 &6615724769985107229
 PrefabInstance:
   m_ObjectHideFlags: 0

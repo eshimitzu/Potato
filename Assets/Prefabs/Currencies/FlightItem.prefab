@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1170844777889598148}
   - component: {fileID: 6872342125206669213}
   m_Layer: 0
-  m_Name: MeatPrefab
+  m_Name: FlightItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81e56fb274a4d41b2bf42b4de0958d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _icon: {fileID: 6872342125206669213}
   _duration: 0.6
   _scaleUpDuration: 0.15
 --- !u!222 &1170844777889598148
@@ -80,7 +81,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e92cdd97ea7fc4e85a3d3bcfa81c6d24, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
