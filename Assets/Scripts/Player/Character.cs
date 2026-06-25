@@ -1,3 +1,4 @@
+using NaughtyAttributes;
 using UnityEngine;
 
 namespace Potato.Player
@@ -21,8 +22,11 @@ namespace Potato.Player
         private void Update()
         {
             _animator.SetFloat(SpeedHash, _movement.CurrentSpeed, _animDampTime, Time.deltaTime);
+            if (Input.GetKeyDown(KeyCode.Space))
+                Attack();
         }
 
+        [Button]
         public void Attack()
         {
             _animator.SetTrigger(AttackHash);
