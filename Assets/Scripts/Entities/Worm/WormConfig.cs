@@ -11,6 +11,6 @@ namespace Potato.Entities.Worm
         public CurrencyConfig meatCurrency;
         public int meatDropAmount = 1;
         public float spawnInterval = 5f;
-        public int spawnCount = 3;
+        public int maxWorms = 3;
     }
 }

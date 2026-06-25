@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   moveSpeed: 1
-  meatCurrency: {fileID: 0}
+  meatCurrency: {fileID: 11400000, guid: 393fccc4b38654151b77cd77290e2612, type: 2}
   meatDropAmount: 1
   spawnInterval: 5
-  spawnCount: 3
+  maxWorms: 3

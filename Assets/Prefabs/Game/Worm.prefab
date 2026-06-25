@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3814038365984174086}
   - component: {fileID: 4746556523915210996}
   - component: {fileID: 6850440420428258848}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Cylinder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7699141894737739012}
   - component: {fileID: 8034603425141098604}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Worm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
