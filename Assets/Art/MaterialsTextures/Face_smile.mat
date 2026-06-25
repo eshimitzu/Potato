@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Face
+  m_Name: Face_smile
   m_Shader: {fileID: 4800000, guid: 0daa94f23f43f498b822cfbfc22c6689, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0

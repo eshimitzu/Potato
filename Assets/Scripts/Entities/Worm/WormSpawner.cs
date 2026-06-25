@@ -8,7 +8,6 @@ namespace Potato.Entities.Worm
     {
         [SerializeField] private WormConfig _config;
         [SerializeField] private GameObject _wormPrefab;
-        [SerializeField] private Transform _potatoTarget;
         [SerializeField] private Transform[] _spawnPoints;
 
         private readonly List<WormController> _activeWorms = new();
@@ -30,7 +29,7 @@ namespace Potato.Entities.Worm
             Transform spawnPoint = _spawnPoints[Random.Range(0, _spawnPoints.Length)];
             GameObject go = Instantiate(_wormPrefab, spawnPoint.position, Quaternion.identity);
             WormController worm = go.GetComponent<WormController>();
-            worm.Initialize(_config, _potatoTarget);
+            worm.Initialize(_config);
             worm.OnDied += OnWormDied;
             _activeWorms.Add(worm);
         }

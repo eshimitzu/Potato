@@ -46,6 +46,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 682cc5dc065984717a22ff914ee3d3e6, type: 2}
+  _faceRenderer: {fileID: 5331312428208534190}
+  _smileMaterial: {fileID: 2100000, guid: 686e9516fa78a7142a0eab72bfe4c128, type: 2}
+  _sadMaterial: {fileID: 2100000, guid: 4aa1c87b533d94716a83bca3aa18133b, type: 2}
 --- !u!1001 &6790642954833505834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -60,7 +63,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12af1c6158a7810488549e69ee317b7c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.33089864
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 12af1c6158a7810488549e69ee317b7c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -110,6 +113,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1105463688787855047}
   m_SourcePrefab: {fileID: 100100000, guid: 12af1c6158a7810488549e69ee317b7c, type: 3}
+--- !u!23 &5331312428208534190 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -7511558181221131132, guid: 12af1c6158a7810488549e69ee317b7c, type: 3}
+  m_PrefabInstance: {fileID: 6790642954833505834}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5979755663848444795 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 12af1c6158a7810488549e69ee317b7c, type: 3}
