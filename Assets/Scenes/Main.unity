@@ -563,6 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d835556255504800a0c5bdcf3a99c1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currencies: []
 --- !u!114 &649705617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -930,6 +931,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2802836503318600903, guid: ff8c7ec1bc6bc8d408d3ec5b92bc3ea4, type: 3}
+      propertyPath: Priority
+      value: 68
+      objectReference: {fileID: 0}
+    - target: {fileID: 2802836503318600903, guid: ff8c7ec1bc6bc8d408d3ec5b92bc3ea4, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 6901948412673613149, guid: ff8c7ec1bc6bc8d408d3ec5b92bc3ea4, type: 3}
       propertyPath: m_Name
       value: IdleSound
@@ -1136,7 +1145,7 @@ MonoBehaviour:
   _interval: 0.02
   _playerTag: Player
   _costCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-  _totalCost: 50
+  _totalCost: 30
   _costPerTick: 1
 --- !u!65 &1315848056
 BoxCollider:
@@ -1424,7 +1433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _target: {fileID: 336531274}
-  _offset: {x: 3, y: 14, z: -8}
   _smoothSpeed: 8
 --- !u!1 &1488346238
 GameObject:
@@ -2654,6 +2662,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1928521650247906987, guid: d28a9387ba2ce486da98f8b6505bfc43, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2645055192606036259, guid: d28a9387ba2ce486da98f8b6505bfc43, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.5
@@ -2701,6 +2713,10 @@ PrefabInstance:
     - target: {fileID: 5592322765412552948, guid: d28a9387ba2ce486da98f8b6505bfc43, type: 3}
       propertyPath: m_Name
       value: CratePlacement
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062485208591710702, guid: d28a9387ba2ce486da98f8b6505bfc43, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2935,7 +2951,7 @@ MonoBehaviour:
   _interval: 0.02
   _playerTag: Player
   _costCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-  _totalCost: 50
+  _totalCost: 25
   _costPerTick: 1
 --- !u!114 &7837250258240295632
 MonoBehaviour:
