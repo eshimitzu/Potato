@@ -343,8 +343,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _potatoNeed: {fileID: 7473372494337310155}
+  _upgrader: {fileID: 120213579850756500}
   _root: {fileID: 8236194737248683009}
   _icon: {fileID: 2429616968290380291}
+  _potatoSize: 2
 --- !u!1 &6882274096695101902
 GameObject:
   m_ObjectHideFlags: 0
