@@ -12,6 +12,10 @@ namespace Potato.Entities.Worm
         [SerializeField] private GameObject _riledView;
         [SerializeField] private Transform _leftEye;
         [SerializeField] private Transform _rightEye;
+        [SerializeField] private float _punchScale = 0.5f;
+        [SerializeField] private float _punchDuration = 0.5f;
+        [SerializeField] private float _hitShakeStrength = 0.15f;
+        [SerializeField] private float _hitShakeDuration = 0.25f;
 
         private WormConfig _config;
         private int _hp;
@@ -32,6 +36,9 @@ namespace Potato.Entities.Worm
             if (_hp <= 0) return;
             _hp--;
             BulgeEyes();
+            transform.DOKill();
+            transform.DOShakePosition(_hitShakeDuration, _hitShakeStrength, 20, 90, false, false)
+                .SetLink(gameObject);
             if (_hp <= 0) Die();
         }
 
@@ -46,7 +53,7 @@ namespace Potato.Entities.Worm
             if (eye == null) return;
             eye.DOKill();
             eye.localScale = Vector3.one;
-            eye.DOPunchScale(Vector3.one * 5f, 0.5f, 1, 0.1f).SetLink(gameObject);
+            eye.DOPunchScale(Vector3.one * _punchScale, _punchDuration, 1, 0.1f).SetLink(gameObject);
         }
 
         private void Appear()
