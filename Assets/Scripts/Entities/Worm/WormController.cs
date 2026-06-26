@@ -46,7 +46,7 @@ namespace Potato.Entities.Worm
             if (eye == null) return;
             eye.DOKill();
             eye.localScale = Vector3.one;
-            eye.DOPunchScale(Vector3.one * 5f, 0.5f, 1, 0.1f);
+            eye.DOPunchScale(Vector3.one * 5f, 0.5f, 1, 0.1f).SetLink(gameObject);
         }
 
         private void Appear()
@@ -54,7 +54,7 @@ namespace Potato.Entities.Worm
             transform.localScale = Vector3.one;
             float targetY = transform.position.y;
             transform.position -= Vector3.up * _config.burrowDepth;
-            transform.DOMoveY(targetY, _config.appearDuration).SetEase(Ease.OutBounce);
+            transform.DOMoveY(targetY, _config.appearDuration).SetEase(Ease.OutBounce).SetLink(gameObject);
         }
 
         private void Die()
@@ -66,6 +66,7 @@ namespace Potato.Entities.Worm
             OnDied?.Invoke(this);
             transform.DOScale(Vector3.zero, _config.deathDuration)
                 .SetEase(Ease.InBack)
+                .SetLink(gameObject)
                 .OnComplete(() => Destroy(gameObject));
         }
     }

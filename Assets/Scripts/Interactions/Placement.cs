@@ -8,6 +8,8 @@ namespace Potato.Interactions
         [SerializeField] private GameObject _sourceObject;
         [SerializeField] private GameObject _targetObject;
         [SerializeField] private int _amountPerTick = 1;
+        [SerializeField] private float _conversionRate = 1f;
+        [SerializeField] private bool _applySourceIcon;
 
         private ICountSource _source;
         private ICountTarget _target;
@@ -53,14 +55,21 @@ namespace Potato.Interactions
         {
             if (_source.Count == 0 || _target.IsFull) return;
             int available = Math.Min(_source.Count, _amountPerTick);
+            int produced = Mathf.Max(1, Mathf.RoundToInt(available * _conversionRate));
             int room = _target.Capacity - _target.Count;
-            int amount = Math.Min(available, room);
-            if (amount <= 0) return;
-            _source.TakeAll();
-            _target.Add(amount);
-            OnTransferred?.Invoke(amount);
+            int take = available;
+            int give = produced;
+            if (give > room)
+            {
+                give = room;
+                take = Mathf.CeilToInt(give / _conversionRate);
+            }
+            if (take <= 0 || give <= 0) return;
+            _source.Take(take);
+            _target.Add(give);
+            OnTransferred?.Invoke(give);
         }
-
+    
         private void TakeFromSource()
         {
             if (_source.Count == 0) return;
@@ -77,7 +86,10 @@ namespace Potato.Interactions
 
         private void RefreshIcon()
         {
-            // icon is driven externally via SetIcon if needed
+            if (_applySourceIcon)
+            {
+                SetIcon(_source.Currency.icon);
+            }
         }
 
         private void RefreshCounter()

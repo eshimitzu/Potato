@@ -11,7 +11,7 @@ namespace Potato.Interactions
         [SerializeField] private Transform _visual;
         [SerializeField] private SpriteRenderer _icon;
         [SerializeField] protected TMP_Text Counter;
-        [SerializeField] private float _interval = 0.5f;
+        [SerializeField] private float _interval = 0.02f;
         [SerializeField] private string _playerTag = "Player";
 
         private Coroutine _tickCoroutine;
@@ -39,20 +39,21 @@ namespace Potato.Interactions
             if (Counter != null) Counter.text = text;
         }
 
-        protected void SetVisible(bool visible)
+        public void SetVisible(bool visible)
         {
             GetComponent<Collider>().enabled = visible;
             if (_visual == null) return;
             _visual.DOKill();
             _visual.DOScale(visible ? _baseScale : Vector3.zero, 0.2f)
-                .SetEase(visible ? Ease.OutBack : Ease.InBack);
+                .SetEase(visible ? Ease.OutBack : Ease.InBack)
+                .SetLink(gameObject);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (!other.CompareTag(_playerTag)) return;
             PlayerInside = true;
-            _visual?.DOScale(_baseScale * 1.2f, 0.2f).SetEase(Ease.OutBack);
+            _visual?.DOScale(_baseScale * 1.2f, 0.2f).SetEase(Ease.OutBack).SetLink(gameObject);
             _tickCoroutine = StartCoroutine(TickLoop());
         }
 
@@ -60,7 +61,7 @@ namespace Potato.Interactions
         {
             if (!other.CompareTag(_playerTag)) return;
             PlayerInside = false;
-            _visual?.DOScale(_baseScale, 0.15f).SetEase(Ease.InOutSine);
+            _visual?.DOScale(_baseScale, 0.15f).SetEase(Ease.InOutSine).SetLink(gameObject);
             if (_tickCoroutine != null) StopCoroutine(_tickCoroutine);
         }
 

@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using Potato.Interactions;
 
+
 namespace Potato.Currencies
 {
     public class CurrencySource : MonoBehaviour, ICountSource, ICountTarget
@@ -9,6 +10,7 @@ namespace Potato.Currencies
         [SerializeField] private CurrencyConfig _currency;
         [SerializeField] private bool _animated = true;
 
+        public CurrencyConfig Currency => _currency;
         public int Count => (int)CurrencySystem.Instance.Get(_currency);
         public int Capacity => int.MaxValue;
         public bool IsFull => false;
@@ -30,12 +32,14 @@ namespace Potato.Currencies
             if (id == _currency.id) OnCountChanged?.Invoke();
         }
 
-        public int TakeAll()
+        public int Take(int amount)
         {
-            int amount = Count;
-            CurrencySystem.Instance.TrySpend(_currency, amount);
-            return amount;
+            int actual = Math.Min(amount, Count);
+            CurrencySystem.Instance.TrySpend(_currency, actual);
+            return actual;
         }
+
+        public int TakeAll() => Take(Count);
 
         public void Add(int amount) => CurrencySystem.Instance.Add(_currency, amount, transform.position, _animated);
     }

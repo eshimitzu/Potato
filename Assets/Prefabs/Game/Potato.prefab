@@ -102,6 +102,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _config: {fileID: 11400000, guid: 7d08910b2d0eb4bbd9c27b7ece201625, type: 2}
   _scaleRoot: {fileID: 6464790497014663617}
+  _upgradePlacement: {fileID: 5888720970705260795}
 --- !u!114 &3340839745190559738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,9 +147,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5299845024474024592}
   - component: {fileID: 142508530082078265}
-  - component: {fileID: 8416546296186564373}
+  - component: {fileID: 5888720970705260795}
   m_Layer: 0
-  m_Name: 'NeedsPlacement '
+  m_Name: 'UpgradePlacement '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -191,7 +192,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8416546296186564373
+--- !u!114 &5888720970705260795
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -200,15 +201,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 2351477940074466119}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 301b791f9651f4ac38546bd2c34dbf93, type: 3}
+  m_Script: {fileID: 11500000, guid: 65cf9605e6eee4cb9ba3ad3fb604a7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _visual: {fileID: 2282682070838682911}
+  _visual: {fileID: 2303943300818571730}
   _icon: {fileID: 3868345876758279938}
   Counter: {fileID: 6018844131204942242}
-  _interval: 0.5
+  _interval: 0.02
   _playerTag: Player
-  _potatoNeed: {fileID: 7473372494337310155}
+  _costCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
+  _totalCost: 1000
+  _costPerTick: 1
 --- !u!1 &4372032314263977598
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +238,7 @@ Transform:
   m_GameObject: {fileID: 4372032314263977598}
   serializedVersion: 2
   m_LocalRotation: {x: 0.37588626, y: -0.17335531, z: 0.07180612, w: 0.90746975}
-  m_LocalPosition: {x: -0.385, y: 2.477, z: 1.046}
+  m_LocalPosition: {x: -0.05, y: 3.38, z: 0.21}
   m_LocalScale: {x: 0.40000007, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -522,6 +525,11 @@ PrefabInstance:
 --- !u!4 &2282682070838682911 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2980180951142345649, guid: 99f602affeb7b4775b669a7baee585d7, type: 3}
+  m_PrefabInstance: {fileID: 3960368275757960878}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2303943300818571730 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2958669033465519996, guid: 99f602affeb7b4775b669a7baee585d7, type: 3}
   m_PrefabInstance: {fileID: 3960368275757960878}
   m_PrefabAsset: {fileID: 0}
 --- !u!212 &3868345876758279938 stripped

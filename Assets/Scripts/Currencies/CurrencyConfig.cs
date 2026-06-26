@@ -13,6 +13,6 @@ namespace Potato.Currencies
         public int initialAmount;
 
         [Button("+ 100")]
-        private void CheatAdd100() => CurrencySystem.Instance.Add(this, 100);
+        private void CheatAdd100() => CurrencySystem.Instance.Add(this, 100, Vector3.zero, false);
     }
 }

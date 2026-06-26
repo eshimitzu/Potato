@@ -28,8 +28,7 @@ namespace Potato.Currencies
             _balances.TryGetValue(cfg.id, out long current);
             _balances[cfg.id] = current + amount;
             OnChanged?.Invoke(cfg.id, _balances[cfg.id]);
-            if (sourceWorldPos != default)
-                OnAddedFromSource?.Invoke(cfg.id, amount, sourceWorldPos, animated);
+            OnAddedFromSource?.Invoke(cfg.id, amount, sourceWorldPos, animated);
         }
 
         public bool TrySpend(CurrencyConfig cfg, long amount)

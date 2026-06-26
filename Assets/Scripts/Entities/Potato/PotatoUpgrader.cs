@@ -11,6 +11,7 @@ namespace Potato.Entities.Potato
     {
         [SerializeField] private PotatoLevelConfig _config;
         [SerializeField] private Transform _scaleRoot;
+        [SerializeField] private BuyPlacement _upgradePlacement;
 
         public PotatoLevelConfig Config => _config;
 
@@ -22,6 +23,19 @@ namespace Potato.Entities.Potato
 
         private void Awake() => ApplyScale(animate: false);
 
+        private void Start()
+        {
+            if (_upgradePlacement == null) return;
+            _upgradePlacement.OnPurchased += OnPlacementPurchased;
+            RefreshPlacement();
+        }
+
+        private void OnDestroy()
+        {
+            if (_upgradePlacement != null)
+                _upgradePlacement.OnPurchased -= OnPlacementPurchased;
+        }
+
         public void Interact() => TryUpgrade(CurrencySystem.Instance);
 
         public bool TryUpgrade(CurrencySystem currencies)
@@ -29,17 +43,42 @@ namespace Potato.Entities.Potato
             if (IsMaxLevel) return false;
             var next = _config.Get(CurrentLevel + 1);
             if (!currencies.TrySpend(next.upgradeCurrency, next.upgradeCost)) return false;
+            ApplyUpgrade();
+            return true;
+        }
+
+        private void OnPlacementPurchased()
+        {
+            if (IsMaxLevel) return;
+            ApplyUpgrade();
+        }
+
+        private void ApplyUpgrade()
+        {
             CurrentLevel++;
             ApplyScale(animate: true);
             OnLevelChanged?.Invoke(CurrentLevel);
-            return true;
+            RefreshPlacement();
+        }
+
+        private void RefreshPlacement()
+        {
+            if (_upgradePlacement == null) return;
+            if (IsMaxLevel)
+            {
+                _upgradePlacement.SetVisible(false);
+                return;
+            }
+            var next = _config.Get(CurrentLevel + 1);
+            _upgradePlacement.SetVisible(true);
+            _upgradePlacement.Setup(next.upgradeCurrency, next.upgradeCost);
         }
 
         private void ApplyScale(bool animate)
         {
             float scale = CurrentData.scale;
             if (animate)
-                _scaleRoot.DOScale(Vector3.one * scale, 0.4f).SetEase(Ease.OutBack);
+                _scaleRoot.DOScale(Vector3.one * scale, 0.4f).SetEase(Ease.OutBack).SetLink(gameObject);
             else
                 _scaleRoot.localScale = Vector3.one * scale;
         }

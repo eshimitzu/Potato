@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Potato.Currencies;
 using Potato.Interactions;
 using Potato.Entities.Potato;
 
@@ -13,6 +14,7 @@ namespace Potato.Entities.Crate
         [SerializeField] private GameObject _halfView;
         [SerializeField] private GameObject _fullView;
 
+        public CurrencyConfig Currency => null;
         public int Count { get; private set; }
         public State CurrentState { get; private set; }
 
@@ -48,15 +50,18 @@ namespace Potato.Entities.Crate
             TakeAll();
         }
 
-        public int TakeAll()
+        public int Take(int amount)
         {
-            int taken = Count;
-            Count = 0;
+            int taken = Math.Min(amount, Count);
+            if (taken <= 0) return 0;
+            Count -= taken;
             OnCountChanged?.Invoke();
             OnCollected?.Invoke(taken);
             UpdateState();
             return taken;
         }
+
+        public int TakeAll() => Take(Count);
 
         private void UpdateState()
         {

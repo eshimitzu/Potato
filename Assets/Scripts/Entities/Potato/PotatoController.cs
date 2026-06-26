@@ -90,7 +90,8 @@ namespace Potato.Entities.Potato
             _idleTween = _squashRoot
                 .DOScale(new Vector3(1.05f, 0.92f, 1.05f), 0.9f)
                 .SetEase(Ease.InOutSine)
-                .SetLoops(-1, LoopType.Yoyo);
+                .SetLoops(-1, LoopType.Yoyo)
+                .SetLink(gameObject);
         }
 
         private void StopIdleSquash()

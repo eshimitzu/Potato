@@ -71,7 +71,7 @@ MonoBehaviour:
   _visual: {fileID: 8268762224795716193}
   _icon: {fileID: 6383548194612489393}
   Counter: {fileID: 4521316675363721745}
-  _interval: 0.5
+  _interval: 0.1
   _playerTag: Player
   _sourceObject: {fileID: 0}
   _targetObject: {fileID: 5592322765412552948}
@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currency: {fileID: 11400000, guid: d3da4945877cb4d08b2504ffd7923ee7, type: 2}
+  _animated: 1
 --- !u!1001 &6615724769985107229
 PrefabInstance:
   m_ObjectHideFlags: 0

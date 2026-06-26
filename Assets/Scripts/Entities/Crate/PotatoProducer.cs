@@ -40,6 +40,7 @@ namespace Potato.Entities.Crate
             go.transform
                 .DOJump(_crate.transform.position, cfg.flyJumpPower, 1, cfg.flyDuration)
                 .SetEase(Ease.InQuad)
+                .SetLink(go)
                 .OnComplete(() =>
                 {
                     _crate.AddPotato();

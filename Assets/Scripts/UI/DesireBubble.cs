@@ -30,13 +30,14 @@ namespace Potato.UI
 
             _root.SetActive(true);
             _root.transform.localScale = Vector3.zero;
-            _root.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack);
+            _root.transform.DOScale(Vector3.one, 0.3f).SetEase(Ease.OutBack).SetLink(gameObject);
         }
 
         private void Hide()
         {
             _root.transform.DOScale(Vector3.zero, 0.2f)
                 .SetEase(Ease.InBack)
+                .SetLink(gameObject)
                 .OnComplete(() => _root.SetActive(false));
         }
     }

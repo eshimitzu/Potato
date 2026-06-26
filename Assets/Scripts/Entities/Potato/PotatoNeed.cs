@@ -45,9 +45,14 @@ namespace Potato.Entities.Potato
         {
             if (CurrentNeed == null) return false;
             if (!CurrencySystem.Instance.TrySpend(CurrentNeed.currency, CurrentNeed.amount)) return false;
+            Satisfy();
+            return true;
+        }
+
+        public void Satisfy()
+        {
             CurrentNeed = null;
             OnNeedSatisfied?.Invoke();
-            return true;
         }
     }
 }
