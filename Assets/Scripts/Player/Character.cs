@@ -13,6 +13,7 @@ namespace Potato.Player
         [SerializeField] private Animator _animator;
         [SerializeField] private PlayerInteractor _interactor;
         [SerializeField] private PlayerConfig _config;
+        [SerializeField] private AudioSource _attackAudio;
         [SerializeField] private float _animDampTime = 0.1f;
 
         private PlayerMovement _movement;
@@ -59,6 +60,7 @@ namespace Potato.Player
             _attackTimer = _config.attackCooldown;
             _animator.ResetTrigger(AttackHash);
             _animator.SetTrigger(AttackHash);
+            _attackAudio?.Play();
         }
 
         // Called via Animation Event at the hit frame
