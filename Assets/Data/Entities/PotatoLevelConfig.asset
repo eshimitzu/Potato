@@ -14,29 +14,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - upgradeCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-    upgradeCost: 10
-    scale: 1.25
+    upgradeCost: 100
+    scale: 1.3
     potatoesPerMinute: 200
     maxStorage: 20
   - upgradeCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-    upgradeCost: 10
+    upgradeCost: 30
     scale: 1.5
-    potatoesPerMinute: 20
+    potatoesPerMinute: 200
     maxStorage: 30
   - upgradeCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-    upgradeCost: 20
+    upgradeCost: 40
     scale: 2
-    potatoesPerMinute: 25
+    potatoesPerMinute: 250
     maxStorage: 40
   - upgradeCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-    upgradeCost: 30
+    upgradeCost: 50
     scale: 2.5
-    potatoesPerMinute: 32
+    potatoesPerMinute: 300
     maxStorage: 50
   - upgradeCurrency: {fileID: 11400000, guid: 62c1437d65dce4a75ad7f5bee6926a83, type: 2}
-    upgradeCost: 40
-    scale: 1.5
-    potatoesPerMinute: 40
+    upgradeCost: 60
+    scale: 3
+    potatoesPerMinute: 350
     maxStorage: 60
   flyDuration: 0.8
   flyJumpPower: 2
