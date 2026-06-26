@@ -9,7 +9,7 @@ namespace Potato.Entities.Well
         public CurrencyConfig meatCurrency;
         public int meatCost = 5;
         public CurrencyConfig softCurrency;
-        public int softCost = 20;
+        public int softCost = 10;
         public float waterTickInterval = 10f;
         public CurrencyConfig waterCurrency;
         public int waterPerTick = 1;

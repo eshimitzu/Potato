@@ -1547,6 +1547,10 @@ PrefabInstance:
       propertyPath: _crate
       value: 
       objectReference: {fileID: 164521573}
+    - target: {fileID: 5299845024474024592, guid: f3c43f67bc9c14ece8ab7125e5cd916e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -2.84
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
