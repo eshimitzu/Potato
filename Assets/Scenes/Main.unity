@@ -1255,7 +1255,7 @@ MonoBehaviour:
   _sourceObject: {fileID: 1222020249}
   _targetObject: {fileID: 653126582}
   _amountPerTick: 1
-  _conversionRate: 1
+  _conversionRate: 2
   _applySourceIcon: 1
 --- !u!65 &1488346240
 BoxCollider:
