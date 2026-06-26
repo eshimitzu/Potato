@@ -11,6 +11,7 @@ namespace Potato.Interactions
         [SerializeField] private Transform _visual;
         [SerializeField] private SpriteRenderer _icon;
         [SerializeField] protected TMP_Text Counter;
+        [SerializeField] private float _enterDelay = 0.5f;
         [SerializeField] private float _interval = 0.02f;
         [SerializeField] private string _playerTag = "Player";
 
@@ -67,6 +68,7 @@ namespace Potato.Interactions
 
         private IEnumerator TickLoop()
         {
+            yield return new WaitForSeconds(_enterDelay);
             while (true)
             {
                 yield return new WaitForSeconds(_interval);
