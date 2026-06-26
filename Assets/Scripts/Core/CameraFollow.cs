@@ -5,8 +5,15 @@ namespace Potato.Core
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField] private Transform _target;
-        [SerializeField] private Vector3 _offset = new Vector3(0f, 8f, -6f);
         [SerializeField] private float _smoothSpeed = 8f;
+
+        private Vector3 _offset;
+
+        private void Awake()
+        {
+            if (_target != null)
+                _offset = transform.position - _target.position;
+        }
 
         private void LateUpdate()
         {

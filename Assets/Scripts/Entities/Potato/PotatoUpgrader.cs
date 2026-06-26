@@ -84,6 +84,6 @@ namespace Potato.Entities.Potato
         }
 
         [Button("Upgrade (cheat)")]
-        private void CheatUpgrade() => TryUpgrade(CurrencySystem.Instance);
+        private void CheatUpgrade() => ApplyUpgrade();
     }
 }

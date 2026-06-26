@@ -54,16 +54,16 @@ namespace Potato.Core
 
         private void ApplySaveData(SaveData data)
         {
-            var savedIds = new HashSet<string>();
-            foreach (var entry in data.currencies)
-            {
-                _currencies.Set(entry.id, entry.amount);
-                savedIds.Add(entry.id);
-            }
-
-            foreach (var cfg in _allCurrencies)
-                if (!savedIds.Contains(cfg.id) && cfg.initialAmount > 0)
-                    _currencies.Set(cfg.id, cfg.initialAmount);
+            // var savedIds = new HashSet<string>();
+            // foreach (var entry in data.currencies)
+            // {
+            //     _currencies.Set(entry.id, entry.amount);
+            //     savedIds.Add(entry.id);
+            // }
+            //
+            // foreach (var cfg in _allCurrencies)
+            //     if (!savedIds.Contains(cfg.id) && cfg.initialAmount > 0)
+            //         _currencies.Set(cfg.id, cfg.initialAmount);
 
             // _potato.RestoreState(data.potatoStage, data.waterTicksAccumulated);
 
