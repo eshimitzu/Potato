@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Water
   displayName: Water
-  icon: {fileID: 21300000, guid: 3b45b98b3aa55994eba1f98ea9801ebd, type: 3}
+  icon: {fileID: 21300000, guid: 879da90aaccfa44b1921f737f8b71e91, type: 3}
   prefab: {fileID: 5574497699645801493, guid: adb401dd58eb34c97a271e7079139caa, type: 3}
   initialAmount: 0
