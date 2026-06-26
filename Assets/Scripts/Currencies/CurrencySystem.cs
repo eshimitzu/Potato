@@ -8,6 +8,8 @@ namespace Potato.Currencies
     {
         public static CurrencySystem Instance { get; private set; }
 
+        [SerializeField] private CurrencyConfig[] _currencies;
+
         private readonly Dictionary<string, long> _balances = new();
 
         public event Action<string, long> OnChanged;
@@ -18,6 +20,15 @@ namespace Potato.Currencies
             if (Instance != null && Instance != this) { Destroy(gameObject); return; }
             Instance = this;
             DontDestroyOnLoad(gameObject);
+        }
+
+        private void Start()
+        {
+            foreach (var cfg in _currencies)
+            {
+                if (cfg.initialAmount > 0)
+                    Add(cfg, cfg.initialAmount, Vector3.zero, false);
+            }
         }
 
         public long Get(CurrencyConfig cfg) => _balances.GetValueOrDefault(cfg.id, 0);
